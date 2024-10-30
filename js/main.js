@@ -347,41 +347,41 @@ dots:false,
 });
 
 // resitration_Form
-$(document).ready(function() {
-	$('.popup-with-form').magnificPopup({
-		type: 'inline',
-		preloader: false,
-		focus: '#name',
+// $(document).ready(function() {
+// 	$('.popup-with-form').magnificPopup({
+// 		type: 'inline',
+// 		preloader: false,
+// 		focus: '#name',
 
-		// When elemened is focused, some mobile browsers in some cases zoom in
-		// It looks not nice, so we disable it:
-		callbacks: {
-			beforeOpen: function() {
-				if($(window).width() < 700) {
-					this.st.focus = false;
-				} else {
-					this.st.focus = '#name';
-				}
-			}
-		}
-  });
-  var wow = new WOW(
-    {
-      boxClass:     'wow',      // animated element css class (default is wow)
-      animateClass: 'animated', // animation css class (default is animated)
-      offset:       0,          // distance to the element when triggering the animation (default is 0)
-      mobile:       true,       // trigger animations on mobile devices (default is true)
-      live:         true,       // act on asynchronously loaded content (default is true)
-      callback:     function(box) {
-        // the callback is fired every time an animation is started
-        // the argument that is passed in is the DOM node being animated
-      },
-      scrollContainer: null,    // optional scroll container selector, otherwise use window,
-      resetAnimation: true,     // reset animation on end (default is true)
-    }
-  );
-  wow.init();
-});
+// 		// When elemened is focused, some mobile browsers in some cases zoom in
+// 		// It looks not nice, so we disable it:
+// 		callbacks: {
+// 			beforeOpen: function() {
+// 				if($(window).width() < 700) {
+// 					this.st.focus = false;
+// 				} else {
+// 					this.st.focus = '#name';
+// 				}
+// 			}
+// 		}
+//   });
+//   var wow = new WOW(
+//     {
+//       boxClass:     'wow',      // animated element css class (default is wow)
+//       animateClass: 'animated', // animation css class (default is animated)
+//       offset:       0,          // distance to the element when triggering the animation (default is 0)
+//       mobile:       true,       // trigger animations on mobile devices (default is true)
+//       live:         true,       // act on asynchronously loaded content (default is true)
+//       callback:     function(box) {
+//         // the callback is fired every time an animation is started
+//         // the argument that is passed in is the DOM node being animated
+//       },
+//       scrollContainer: null,    // optional scroll container selector, otherwise use window,
+//       resetAnimation: true,     // reset animation on end (default is true)
+//     }
+//   );
+//   wow.init();
+// });
 
 
 
@@ -408,43 +408,16 @@ mailChimp();
             $("#search_input_box").slideToggle();
             $("#search_input").focus();
         });
-
+        
+        
+  
+      
 })(jQuery);	
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  const loaderContainer = document.getElementById("page-loader");
-  const number = 24;
-  const tan = Math.tan(Math.PI / number).toFixed(3);
-
-  // Register the custom CSS property
-  CSS.registerProperty({
-      name: '--tan',
-      syntax: '<number>',
-      inherits: true,
-      initialValue: tan
-  });
-
-  // Create loader segments
-  for (let i = 0; i < number; i++) {
-      const div = document.createElement('div');
-      const progress = (i / number).toFixed(3);
-
-      div.className = 'segment';
-      div.style.setProperty('--progress', progress);
-      loaderContainer.append(div);
-  }
-
-  // Add website name below the loader
-  const title = document.createElement('h2');
-  title.textContent = "AVENDONR";
-  loaderContainer.append(title);
-
-  // Hide loader after page load
-  window.addEventListener("load", function () {
-      loaderContainer.style.opacity = "0";
-      setTimeout(() => {
-          loaderContainer.style.display = "none";
-      }, 500); // Adjust delay as needed
-  });
+window.addEventListener("load", function () {
+  document.getElementById("page-loader").style.display = "none"; // Hide the loader
+  document.body.style.overflow = "auto"; // Re-enable scrolling
 });
+
+
+
