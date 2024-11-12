@@ -419,5 +419,54 @@ window.addEventListener("load", function () {
   document.body.style.overflow = "auto"; // Re-enable scrolling
 });
 
+// Load the YouTube IFrame API dynamically
+const scriptTag = document.createElement("script");
+scriptTag.src = "https://www.youtube.com/iframe_api";
+document.body.appendChild(scriptTag);
 
+let player;
+let videoIndex = 0;
+const videoUrls = ["Jfj1HBqRJRI", "Zm8QEtli4Og", "7Vx90oZQByA", "n6pzIxvPEog", "44y-88QaeWo"];
+const readMoreBtn = document.getElementById("readMoreBtn");
 
+// Wait for the API to load and then initialize the player
+scriptTag.onload = () => {
+  player = new YT.Player("video-container", {
+    videoId: videoUrls[videoIndex],
+    playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: videoUrls.join(",") },
+    events: {
+      onReady: startVideoSequence,
+      onStateChange: handleVideoStateChange
+    }
+  });
+};
+
+// Start the sequence of videos
+function startVideoSequence(event) {
+  player.mute();
+  playNextVideo();
+}
+
+// Plays each video for 10 seconds and then transitions to the next
+function playNextVideo() {
+  player.loadVideoById(videoUrls[videoIndex]);
+  setTimeout(() => {
+    videoIndex = (videoIndex + 1) % videoUrls.length;
+    playNextVideo();
+  }, 10000); // Play each video for 10 seconds
+}
+
+// Redirects to YouTube for the current video when "Read more" is clicked
+readMoreBtn.addEventListener('click', () => {
+  const currentVideoId = videoUrls[videoIndex];
+  const youtubeUrl = `https://www.youtube.com/watch?v=${currentVideoId}`;
+  window.open(youtubeUrl, "_blank");
+});
+
+// Handles video state changes
+function handleVideoStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    videoIndex = (videoIndex + 1) % videoUrls.length;
+    playNextVideo();
+  }
+}
